@@ -1,0 +1,16 @@
+wget -q -O anoma.sh https://api.nodes.guru/anoma.sh && chmod +x anoma.sh && sudo /bin/bash anoma.sh
+source $HOME/.bash_profile
+journalctl -u anomad -f
+YOUR_WALLET_NAME
+anoma wallet key gen --alias YOUR_WALLET_NAME
+anomac init-account --alias YOUR_ACCOUNT_ALIAS --public-key YOUR_WALLET_NAME --source YOUR_WALLET_NAME
+anoma client transfer --source faucet --target YOUR_ACCOUNT_ALIAS --signer YOUR_ACCOUNT_ALIAS --token XAN --amount 1000
+anoma client balance --token XAN --owner YOUR_ACCOUNT_ALIAS 
+anoma client init-validator --alias YOUR_VALIDATOR_NAME --source YOUR_ACCOUNT_ALIAS
+sudo systemctl restart anomad 
+anoma client bond --source YOUR_ACCOUNT_ALIAS --validator YOUR_VALIDATOR_NAME --amount 950
+anoma client bonds --owner YOUR_ACCOUNT_ALIAS 
+anoma wallet key list
+anoma wallet key gen --alias YOUR_WALLET_NAME
+anoma wallet address list
+anoma wallet address gen --alias YOUR_NEW_WALLET_ALIAS
